@@ -1,5 +1,5 @@
-{
-if(true){	
+
+beauty(){
   gROOT->SetStyle("Plain");
   gStyle->SetTitleBorderSize(0);
   gStyle->SetOptStat("");
@@ -41,286 +41,322 @@ if(true){
   gStyle->SetOptStat(0000);
 }
 
-TH1D* h1_nuwro_reco = new TH1D("","",100,-1,1);
+init(){
+  TH1D* h1_nuwro_reco = new TH1D("","",100,-1,1);
 
-TH2D* h2_trueE_trueY_nominal = new TH2D("h2_trueE_trueY_nominal","h2_trueE_trueY_nominal_Ar", 20, 0, 5, 20, 0, 1);
-TH2D* h2_recoE_recoY_nominal = new TH2D("h2_recoE_recoY_nominal","h2_recoE_recoY_nominal_Ar", 20, 0, 5, 20, 0, 1);
-TH2D* h2_nuwro_true = new TH2D("h2_nuwro_Ar","h2_nuwro_Ar", 20, 0, 5, 20, 0, 1);
-TH2D* h2_Ar_diff = new TH2D("h2_Ar_diff","h2_Ar_diff", 20, 0, 5, 20, 0, 1);
+  TH2D* h2_trueE_trueY_nominal = new TH2D("h2_trueE_trueY_nominal","h2_trueE_trueY_nominal_Ar", 20, 0, 5, 20, 0, 1);
+  TH2D* h2_recoE_recoY_nominal = new TH2D("h2_recoE_recoY_nominal","h2_recoE_recoY_nominal_Ar", 20, 0, 5, 20, 0, 1);
+  TH2D* h2_nuwro_true = new TH2D("h2_nuwro_Ar","h2_nuwro_Ar", 20, 0, 5, 20, 0, 1);
+  TH2D* h2_Ar_diff = new TH2D("h2_Ar_diff","h2_Ar_diff", 20, 0, 5, 20, 0, 1);
 
-TH2D* h2_trueE_trueY_var[20];
-TH2D* h2_recoE_recoY_var[20];
+  TH2D* h2_trueE_trueY_var[20];
+  TH2D* h2_recoE_recoY_var[20];
 
-for(Int_t i=0;i<20;i++){
-  h2_trueE_trueY_var[i] = new TH2D("","true", 20, 0, 5, 20, 0, 1);
-  h2_recoE_recoY_var[i] = new TH2D("","reco", 20, 0, 5, 20, 0, 1);
-}
+  for(Int_t i=0;i<20;i++){
+    h2_trueE_trueY_var[i] = new TH2D("","true", 20, 0, 5, 20, 0, 1);
+    h2_recoE_recoY_var[i] = new TH2D("","reco", 20, 0, 5, 20, 0, 1);
+  }
 
-TH2D* h2_trueE_trueY_nominal_CH = new TH2D("h2_trueE_trueY_nominal_CH","h2_trueE_trueY_nominal_CH", 20, 0, 5, 20, 0, 1);
-TH2D* h2_recoE_recoY_nominal_CH = new TH2D("h2_recoE_recoY_nominal_CH","h2_recoE_recoY_nominal_CH", 20, 0, 5, 20, 0, 1);
-TH2D* h2_nuwro_true_CH = new TH2D("h2_nuwro_CH","h2_nuwro_CH", 20, 0, 5, 20, 0, 1);
-TH2D* h2_Ar_diff_CH = new TH2D("h2_CH_diff","h2_CH_diff", 20, 0, 5, 20, 0, 1);
+  TH2D* h2_trueE_trueY_nominal_CH = new TH2D("h2_trueE_trueY_nominal_CH","h2_trueE_trueY_nominal_CH", 20, 0, 5, 20, 0, 1);
+  TH2D* h2_recoE_recoY_nominal_CH = new TH2D("h2_recoE_recoY_nominal_CH","h2_recoE_recoY_nominal_CH", 20, 0, 5, 20, 0, 1);
+  TH2D* h2_nuwro_true_CH = new TH2D("h2_nuwro_CH","h2_nuwro_CH", 20, 0, 5, 20, 0, 1);
+  TH2D* h2_Ar_diff_CH = new TH2D("h2_CH_diff","h2_CH_diff", 20, 0, 5, 20, 0, 1);
 
-TH2D* h2_trueE_trueY_var_CH[20];
-TH2D* h2_recoE_recoY_var_CH[20];
+  TH2D* h2_trueE_trueY_var_CH[20];
+  TH2D* h2_recoE_recoY_var_CH[20];
 
-for(Int_t i=0;i<20;i++){
-  h2_trueE_trueY_var_CH[i] = new TH2D("","true", 20, 0, 5, 20, 0, 1);
-  h2_recoE_recoY_var_CH[i] = new TH2D("","reco", 20, 0, 5, 20, 0, 1);
-}
+  for(Int_t i=0;i<20;i++){
+    h2_trueE_trueY_var_CH[i] = new TH2D("","true", 20, 0, 5, 20, 0, 1);
+    h2_recoE_recoY_var_CH[i] = new TH2D("","reco", 20, 0, 5, 20, 0, 1);
+  }
 
-TFile genie_Ar("genie/CAF_Ar.root");
-TFile genie_CH("genie/CAF_CH.root");
-TFile nuwro_Ar("nuwro/my_Ar_tracker.root");
-TFile nuwro_CH("nuwro/my_CH_tracker.root");
+  TFile genie_Ar("genie/CAF_Ar.root");
+  TFile genie_CH("genie/CAF_CH.root");
+  TFile nuwro_Ar("nuwro/my_Ar_tracker.root");
+  TFile nuwro_CH("nuwro/my_CH_tracker.root");
 
-TTree* genieAr = (TTree*)genie_Ar.Get("caf");
-TTree* genieCH = (TTree*)genie_CH.Get("caf");
-TTree* nuwroAr = (TTree*)nuwro_Ar.Get("nRooTracker");
-TTree* nuwroCH = (TTree*)nuwro_CH.Get("nRooTracker");
+  TTree* genieAr = (TTree*)genie_Ar.Get("caf");
+  TTree* genieCH = (TTree*)genie_CH.Get("caf");
+  TTree* nuwroAr = (TTree*)nuwro_Ar.Get("nRooTracker");
+  TTree* nuwroCH = (TTree*)nuwro_CH.Get("nRooTracker");
 
-Double_t wgt_MaCCQE[10], wgt_VecFFCCQEshape[10], wgt_MaCCRES[10], wgt_MvCCRES[10], wgt_AhtBY[10], wgt_BhtBY[10], wgt_CV1uBY[10], 
+  Double_t wgt_MaCCQE[10], wgt_VecFFCCQEshape[10], wgt_MaCCRES[10], wgt_MvCCRES[10], wgt_AhtBY[10], wgt_BhtBY[10], wgt_CV1uBY[10], 
 	 wgt_CV2uBY[10], wgt_FrElas_pi[10], wgt_FtInel_pi[10], wgt_FrAbs_pi[10], wgt_FormZone[10], wgt_FrPiProd_pi[10], 
 	 wgt_MFP_N[10], wgt_FrCEx_N[10], wgt_CCQEEPauliSupViaKF[10], wgt_Mnv2p2hGaussEnhancement[10], wgt_MKSPP_ReWeight[10],
 	 wgt_E2p2h_A_nu[10], wgt_E2p2h_B_nu[10], wgt_E2p2h_A_nubar[10], wgt_E2p2h_B_nubar[10], wgt_BePRA_A[10], wgt_BePRA_B[10], 
 	 wgt_BePRA_D[10], wgt_BePRA_E[10], wgt_C12ToAr40_2p2hScaling_nu[10], wgt_C12ToAr40_2p2hScaling_nubar[10], 
 	 wgt_nuenuebar_xsec_ratio[10],  wgt_nuenumu_xsec_ratio[10], wgt_SPPLowQ2Suppression[10], wgt_FSILikeEAvailSmearing[10];
 
-Double_t Ev;
-Double_t YY;
-Double_t Ev_reco;
-Double_t Elep_reco, eP; 
-Int_t isFD, isCC, nuPDG, LepPDG;
-Double_t LepE, eDepP, eDepN, eDepPip, eDepPim, eDepPi0, eDepOther;
-
-genieAr->SetBranchAddress("Ev",&Ev);
-genieAr->SetBranchAddress("Y",&YY);
-genieAr->SetBranchAddress("Ev_reco",&Ev_reco);
-genieAr->SetBranchAddress("Elep_reco",&Elep_reco);
-genieAr->SetBranchAddress("eP",&eP);
-genieAr->SetBranchAddress("isFD",&isFD);
-genieAr->SetBranchAddress("isCC",&isCC);
-genieAr->SetBranchAddress("nuPDG",&nuPDG);
-genieAr->SetBranchAddress("LepPDG",&LepPDG);
-genieAr->SetBranchAddress("LepE",&LepE);
-genieAr->SetBranchAddress("eDepN",&eDepN);
-genieAr->SetBranchAddress("eDepP",&eDepP);
-genieAr->SetBranchAddress("eDepPip",&eDepPip);
-genieAr->SetBranchAddress("eDepPim",&eDepPim);
-genieAr->SetBranchAddress("eDepPi0",&eDepPi0);
-genieAr->SetBranchAddress("eDepOther",&eDepOther);
-
-genieAr->SetBranchAddress("wgt_MaCCRES",&wgt_MaCCRES);
-genieAr->SetBranchAddress("wgt_MvCCRES",&wgt_MvCCRES);
-genieAr->SetBranchAddress("wgt_AhtBY",&wgt_AhtBY);
-genieAr->SetBranchAddress("wgt_BhtBY",&wgt_BhtBY);
-genieAr->SetBranchAddress("wgt_CV1uBY",&wgt_CV1uBY);
-genieAr->SetBranchAddress("wgt_CV2uBY",&wgt_CV2uBY);
-genieAr->SetBranchAddress("wgt_C12ToAr40_2p2hScaling_nu",&wgt_C12ToAr40_2p2hScaling_nu);
-genieAr->SetBranchAddress("wgt_nuenuebar_xsec_ratio",&wgt_nuenuebar_xsec_ratio);
-genieAr->SetBranchAddress("wgt_SPPLowQ2Suppression",&wgt_SPPLowQ2Suppression);
-genieAr->SetBranchAddress("wgt_FSILikeEAvailSmearing",&wgt_FSILikeEAvailSmearing);
-
-genieAr->SetBranchAddress("wgt_E2p2h_A_nu",&wgt_E2p2h_A_nu);
-genieAr->SetBranchAddress("wgt_E2p2h_B_nu",&wgt_E2p2h_B_nu);
-genieAr->SetBranchAddress("wgt_E2p2h_A_nubar",&wgt_E2p2h_A_nubar);
-genieAr->SetBranchAddress("wgt_E2p2h_B_nubar",&wgt_E2p2h_B_nubar);
-genieAr->SetBranchAddress("wgt_Mnv2p2hGaussEnhancement",&wgt_Mnv2p2hGaussEnhancement);
-
-bool selected = false;
-
-int Nentries = 0;
-if(genieAr->GetEntries()> nuwroAr->GetEntries()) Nentries = nuwroAr->GetEntries();
-else Nentries = genieAr->GetEntries();
-
-for(Int_t i=0;i<Nentries; i++){
-  genieAr->GetEntry(i);
-  //cout<<Ev<<" "<<YY<<" "<<Ev_reco<<" "<<Elep_reco<<endl;
-  if(isCC && nuPDG == 14 ) selected = true;
-  else selected = false;
-
-  if (selected){
-    if(isFD) Ev_reco = LepE + eDepP + eDepN + eDepPip + eDepPim + eDepPi0 + eDepOther;
-
-    h2_trueE_trueY_nominal->Fill(Ev, YY);
-    h2_recoE_recoY_nominal->Fill(Ev_reco, (Ev_reco-Elep_reco)/Ev_reco);
-
-    h2_trueE_trueY_var[0]->Fill(Ev, YY, wgt_MvCCRES[2]);
-    h2_recoE_recoY_var[0]->Fill(Ev_reco, (Ev_reco-Elep_reco)/Ev_reco, wgt_MvCCRES[2]);
-
-    h2_trueE_trueY_var[1]->Fill(Ev, YY, wgt_AhtBY[2]);
-    h2_recoE_recoY_var[1]->Fill(Ev_reco, (Ev_reco-Elep_reco)/Ev_reco, wgt_AhtBY[2]);
-
-    h2_trueE_trueY_var[2]->Fill(Ev, YY, wgt_BhtBY[2]);
-    h2_recoE_recoY_var[2]->Fill(Ev_reco, (Ev_reco-Elep_reco)/Ev_reco, wgt_BhtBY[2]);
-
-    h2_trueE_trueY_var[3]->Fill(Ev, YY, wgt_C12ToAr40_2p2hScaling_nu[2]);
-    h2_recoE_recoY_var[3]->Fill(Ev_reco, (Ev_reco-Elep_reco)/Ev_reco, wgt_C12ToAr40_2p2hScaling_nu[2]);  
-
-    h2_trueE_trueY_var[4]->Fill(Ev, YY, wgt_SPPLowQ2Suppression[2]);
-    h2_recoE_recoY_var[4]->Fill(Ev_reco, (Ev_reco-Elep_reco)/Ev_reco, wgt_SPPLowQ2Suppression[2]);
-
-    h2_trueE_trueY_var[5]->Fill(Ev, YY, wgt_FSILikeEAvailSmearing[2]);
-    h2_recoE_recoY_var[5]->Fill(Ev_reco, (Ev_reco-Elep_reco)/Ev_reco, wgt_FSILikeEAvailSmearing[2]);
-
-    h2_trueE_trueY_var[6]->Fill(Ev, YY, wgt_nuenuebar_xsec_ratio[2]);
-    h2_recoE_recoY_var[6]->Fill(Ev_reco, (Ev_reco-Elep_reco)/Ev_reco, wgt_nuenuebar_xsec_ratio[2]);
-
-    h2_trueE_trueY_var[7]->Fill(Ev, YY, wgt_E2p2h_A_nu[2]);
-    h2_recoE_recoY_var[7]->Fill(Ev_reco, (Ev_reco-Elep_reco)/Ev_reco, wgt_E2p2h_A_nu[2]);
-
-    h2_trueE_trueY_var[8]->Fill(Ev, YY, wgt_E2p2h_B_nu[2]);
-    h2_recoE_recoY_var[8]->Fill(Ev_reco, (Ev_reco-Elep_reco)/Ev_reco, wgt_E2p2h_B_nu[2]);
-
-    h2_trueE_trueY_var[9]->Fill(Ev, YY, wgt_Mnv2p2hGaussEnhancement[2]);
-    h2_recoE_recoY_var[9]->Fill(Ev_reco, (Ev_reco-Elep_reco)/Ev_reco, wgt_Mnv2p2hGaussEnhancement[2]);
-  }
+  Double_t Ev;
+  Double_t YY;
+  Double_t Ev_reco;
+  Double_t Elep_reco, eP; 
+  Int_t isFD, isCC, nuPDG, LepPDG;
+  Double_t LepE, eDepP, eDepN, eDepPip, eDepPim, eDepPi0, eDepOther;
 }
 
+processing_Ar(){
 
-Double_t EvtVtx[3], StdHepP4[100][4];
-int StdHepPdg[100];
-double nuE, lepE;
-double pEnergy;
-double nuE_reco;
+  genieAr->SetBranchAddress("Ev",&Ev);
+  genieAr->SetBranchAddress("Y",&YY);
+  genieAr->SetBranchAddress("Ev_reco",&Ev_reco);
+  genieAr->SetBranchAddress("Elep_reco",&Elep_reco);
+  genieAr->SetBranchAddress("eP",&eP);
+  genieAr->SetBranchAddress("isFD",&isFD);
+  genieAr->SetBranchAddress("isCC",&isCC);
+  genieAr->SetBranchAddress("nuPDG",&nuPDG);
+  genieAr->SetBranchAddress("LepPDG",&LepPDG);
+  genieAr->SetBranchAddress("LepE",&LepE);
+  genieAr->SetBranchAddress("eDepN",&eDepN);
+  genieAr->SetBranchAddress("eDepP",&eDepP);
+  genieAr->SetBranchAddress("eDepPip",&eDepPip);
+  genieAr->SetBranchAddress("eDepPim",&eDepPim);
+  genieAr->SetBranchAddress("eDepPi0",&eDepPi0);
+  genieAr->SetBranchAddress("eDepOther",&eDepOther);
 
-nuwroAr->SetBranchAddress("StdHepP4",&StdHepP4);
-nuwroAr->SetBranchAddress("StdHepPdg",&StdHepPdg);
+  genieAr->SetBranchAddress("wgt_MaCCRES",&wgt_MaCCRES);
+  genieAr->SetBranchAddress("wgt_MvCCRES",&wgt_MvCCRES);
+  genieAr->SetBranchAddress("wgt_AhtBY",&wgt_AhtBY);
+  genieAr->SetBranchAddress("wgt_BhtBY",&wgt_BhtBY);
+  genieAr->SetBranchAddress("wgt_CV1uBY",&wgt_CV1uBY);
+  genieAr->SetBranchAddress("wgt_CV2uBY",&wgt_CV2uBY);
+  genieAr->SetBranchAddress("wgt_C12ToAr40_2p2hScaling_nu",&wgt_C12ToAr40_2p2hScaling_nu);
+  genieAr->SetBranchAddress("wgt_nuenuebar_xsec_ratio",&wgt_nuenuebar_xsec_ratio);
+  genieAr->SetBranchAddress("wgt_SPPLowQ2Suppression",&wgt_SPPLowQ2Suppression);
+  genieAr->SetBranchAddress("wgt_FSILikeEAvailSmearing",&wgt_FSILikeEAvailSmearing);
 
-for(Int_t j=0; j< Nentries; j++){
-  nuwroAr->GetEntry(j);	
-  selected = false;
-  pEnergy = 0;
+  genieAr->SetBranchAddress("wgt_E2p2h_A_nu",&wgt_E2p2h_A_nu);
+  genieAr->SetBranchAddress("wgt_E2p2h_B_nu",&wgt_E2p2h_B_nu);
+  genieAr->SetBranchAddress("wgt_E2p2h_A_nubar",&wgt_E2p2h_A_nubar);
+  genieAr->SetBranchAddress("wgt_E2p2h_B_nubar",&wgt_E2p2h_B_nubar);
+  genieAr->SetBranchAddress("wgt_Mnv2p2hGaussEnhancement",&wgt_Mnv2p2hGaussEnhancement);
 
-  //cout<<StdHepPdg[3]<<endl;
-  for(Int_t i=0;i<6;i++){
-    if(StdHepPdg[i] == 14)
-      nuE = StdHepP4[i][3];
-    if(StdHepPdg[i] == 13){
-      lepE = StdHepP4[i][3];
-      selected = true;
+  bool selected = false;
+
+  int Nentries = 0;
+  if(genieAr->GetEntries()> nuwroAr->GetEntries()) Nentries = nuwroAr->GetEntries();
+  else Nentries = genieAr->GetEntries();
+
+  for(Int_t i=0;i<Nentries; i++){
+    genieAr->GetEntry(i);
+    //cout<<Ev<<" "<<YY<<" "<<Ev_reco<<" "<<Elep_reco<<endl;
+    if(isCC && nuPDG == 14 ) selected = true;
+    else selected = false;
+
+    if (selected){
+      if(isFD) Ev_reco = LepE + eDepP + eDepN + eDepPip + eDepPim + eDepPi0 + eDepOther;
+
+      h2_trueE_trueY_nominal->Fill(Ev, YY);
+      h2_recoE_recoY_nominal->Fill(Ev_reco, (Ev_reco-Elep_reco)/Ev_reco);
+
+      h2_trueE_trueY_var[0]->Fill(Ev, YY, wgt_MvCCRES[2]);
+      h2_recoE_recoY_var[0]->Fill(Ev_reco, (Ev_reco-Elep_reco)/Ev_reco, wgt_MvCCRES[2]);
+
+      h2_trueE_trueY_var[1]->Fill(Ev, YY, wgt_AhtBY[2]);
+      h2_recoE_recoY_var[1]->Fill(Ev_reco, (Ev_reco-Elep_reco)/Ev_reco, wgt_AhtBY[2]);
+
+      h2_trueE_trueY_var[2]->Fill(Ev, YY, wgt_BhtBY[2]);
+      h2_recoE_recoY_var[2]->Fill(Ev_reco, (Ev_reco-Elep_reco)/Ev_reco, wgt_BhtBY[2]);
+
+      h2_trueE_trueY_var[3]->Fill(Ev, YY, wgt_C12ToAr40_2p2hScaling_nu[2]);
+      h2_recoE_recoY_var[3]->Fill(Ev_reco, (Ev_reco-Elep_reco)/Ev_reco, wgt_C12ToAr40_2p2hScaling_nu[2]);  
+
+      h2_trueE_trueY_var[4]->Fill(Ev, YY, wgt_SPPLowQ2Suppression[2]);
+      h2_recoE_recoY_var[4]->Fill(Ev_reco, (Ev_reco-Elep_reco)/Ev_reco, wgt_SPPLowQ2Suppression[2]);
+
+      h2_trueE_trueY_var[5]->Fill(Ev, YY, wgt_FSILikeEAvailSmearing[2]);
+      h2_recoE_recoY_var[5]->Fill(Ev_reco, (Ev_reco-Elep_reco)/Ev_reco, wgt_FSILikeEAvailSmearing[2]);
+
+      h2_trueE_trueY_var[6]->Fill(Ev, YY, wgt_nuenuebar_xsec_ratio[2]);
+      h2_recoE_recoY_var[6]->Fill(Ev_reco, (Ev_reco-Elep_reco)/Ev_reco, wgt_nuenuebar_xsec_ratio[2]);
+
+      h2_trueE_trueY_var[7]->Fill(Ev, YY, wgt_E2p2h_A_nu[2]);
+      h2_recoE_recoY_var[7]->Fill(Ev_reco, (Ev_reco-Elep_reco)/Ev_reco, wgt_E2p2h_A_nu[2]);
+
+      h2_trueE_trueY_var[8]->Fill(Ev, YY, wgt_E2p2h_B_nu[2]);
+      h2_recoE_recoY_var[8]->Fill(Ev_reco, (Ev_reco-Elep_reco)/Ev_reco, wgt_E2p2h_B_nu[2]);
+
+      h2_trueE_trueY_var[9]->Fill(Ev, YY, wgt_Mnv2p2hGaussEnhancement[2]);
+      h2_recoE_recoY_var[9]->Fill(Ev_reco, (Ev_reco-Elep_reco)/Ev_reco, wgt_Mnv2p2hGaussEnhancement[2]);
     }
-    if(i>1 && (StdHepPdg[i] == 2212 || StdHepPdg[i] == 2112)){
-      pEnergy += StdHepP4[i][3];
+  }
+
+
+  Double_t EvtVtx[3], StdHepP4[100][4];
+  int StdHepPdg[100];
+  double nuE, lepE;
+  double pEnergy;
+  double nuE_reco;
+
+  nuwroAr->SetBranchAddress("StdHepP4",&StdHepP4);
+  nuwroAr->SetBranchAddress("StdHepPdg",&StdHepPdg);
+
+  for(Int_t j=0; j< Nentries; j++){
+    nuwroAr->GetEntry(j);	
+    selected = false;
+    pEnergy = 0;
+
+    //cout<<StdHepPdg[3]<<endl;
+    for(Int_t i=0;i<6;i++){
+      if(StdHepPdg[i] == 14)
+        nuE = StdHepP4[i][3];
+      if(StdHepPdg[i] == 13){
+        lepE = StdHepP4[i][3];
+        selected = true;
+      }
+      if(i>1 && (StdHepPdg[i] == 2212 || StdHepPdg[i] == 2112)){
+        pEnergy += StdHepP4[i][3];
+      }  
+    }
+    nuE_reco = nuE - 0.2 * pEnergy;
+    if (selected ){
+      h2_nuwro_true->Fill(nuE_reco, (nuE_reco-lepE) / nuE_reco );
+      h1_nuwro_reco -> Fill((nuE-nuE_reco)/ nuE);
+      //cout<<nuE<<" "<<lepE<<endl;
     }  
   }
-  nuE_reco = nuE - 0.2 * pEnergy;
-  if (selected ){
-    h2_nuwro_true->Fill(nuE_reco, (nuE_reco-lepE) / nuE_reco );
-    h1_nuwro_reco -> Fill((nuE-nuE_reco)/ nuE);
-    //cout<<nuE<<" "<<lepE<<endl;
-  }  
+
+
+  new TCanvas();
+  h1_nuwro_reco->GetXaxis()->SetTitle("(E_{true} - E_{reco}) / E_{true}");
+  h1_nuwro_reco->GetYaxis()->SetTitle("Events ");
+  h1_nuwro_reco->SetLineWidth(3);
+  h1_nuwro_reco->Draw("");
+}
+
+setInteration(int i){
+  int interationTime = i; 
 }
 
 
-new TCanvas();
-h1_nuwro_reco->GetXaxis()->SetTitle("(E_{true} - E_{reco}) / E_{true}");
-h1_nuwro_reco->GetYaxis()->SetTitle("Events ");
-h1_nuwro_reco->SetLineWidth(3);
-h1_nuwro_reco->Draw("");
+MCMC_master(){
 
-
-double currInt = 10e11;
-double finI, finJ, finK;
-double finII, finJJ, finKK;
-double finIII, finJJJ, finKKK;
-double finIIII, finJJJJ, finKKKK;
-
-for(Int_t i=0;i<7;i++){
-  //cout<<"in i = "<<i<<endl;
-  for(Int_t j=3;j<4;j++){
-    for(Int_t k=3;k<4;k++){
-    for(Int_t ii=0;ii<7;ii++){
-    cout<<"in i j k ii "<<i<<" "<<j<<" "<<k<<" "<<ii<<endl;
-    for(Int_t jj=0;jj<7;jj++){
-    for(Int_t kk=0;kk<7;kk++){
-    for(Int_t iii=3;iii<4;iii++){
-    for(Int_t jjj=0;jjj<7;jjj++){
-    for(Int_t kkk=0;kkk<7;kkk++){
-    for(Int_t iiii=0;iiii<7;iiii++){
-      double currI = (i-3)*0.5;
-      double currJ = (j-3)*0.5;
-      double currK = (k-3)*0.5; 
-      double currII = (ii-3)*0.5;
-      double currJJ = (jj-3)*0.5;
-      double currKK = (kk-3)*0.5;
-      double currIII = (iii-3)*0.5;
-      double currJJJ = (jjj-3)*0.5;
-      double currKKK = (kkk-3)*0.5;
-      double currIIII = (iiii-3)*0.5;
-      double acc = 0;
-      for(Int_t iX =0; iX<h2_trueE_trueY_var[0]->GetNbinsX();iX++ ){
-        for(Int_t iY =0; iY<h2_trueE_trueY_var[0]->GetNbinsY();iY++ ){
-	  if(h2_nuwro_true->GetBinContent(iX+1,iY+1)>0) acc += TMath::Power(h2_trueE_trueY_nominal->GetBinContent(iX+1,iY+1) + h2_trueE_trueY_var[0]->GetBinContent(iX+1,iY+1)*currI + h2_trueE_trueY_var[1]->GetBinContent(iX+1,iY+1)*currJ + h2_trueE_trueY_var[2]->GetBinContent(iX+1,iY+1)*currK + h2_trueE_trueY_var[3]->GetBinContent(iX+1,iY+1)*currII + h2_trueE_trueY_var[4]->GetBinContent(iX+1,iY+1)*currJJ + h2_trueE_trueY_var[5]->GetBinContent(iX+1,iY+1)*currKK + h2_trueE_trueY_var[6]->GetBinContent(iX+1,iY+1)*currIII + h2_trueE_trueY_var[7]->GetBinContent(iX+1,iY+1)*currJJJ + h2_trueE_trueY_var[8]->GetBinContent(iX+1,iY+1)*currKKK + h2_trueE_trueY_var[9]->GetBinContent(iX+1,iY+1)*currIIII - 10 * h2_trueE_trueY_nominal->GetBinContent(iX+1,iY+1) - h2_nuwro_true->GetBinContent(iX+1,iY+1),2) / h2_nuwro_true->GetBinContent(iX+1,iY+1) ;
-        }
-      }
-      acc += currI*currI + currJ*currJ + currK*currK +
-	     currII*currII + currJJ*currJJ + currKK*currKK + 
-	     currIII*currIII + currJJJ*currJJJ + currKKK*currKKK +
-	     currIIII*currIIII ;
-      //cout<<acc<<endl;
-
-      if(acc < currInt){
-        currInt = acc;
-	cout<<i<<" "<<j<<" "<<k<<" "<<currInt<<endl;
-	finI = currI; finJ = currJ; finK = currK;
-	finII = currII; finJJ = currJJ; finKK = currKK;
-	finIII = currIII; finJJJ = currJJJ; finKKK = currKKK;
-	finIIII = currIIII;
-      }
-    }}}  }}}} 
+  double currVec[10];
+  double propVec[10];
+  double saveRes = 10000000;
+  TVector _currList = new TVector(10) ;
+  for(int i=0;i<interactionTime;i++){
+    for(int i=0;i<10;i++){
+      currVec[i] = saveList[i];
+      _currList.push_back(currVec[i]+gRandom->Uniform(0,1)); 
     }
-  }  
-}
-
-for(Int_t iX =0; iX<h2_trueE_trueY_var[0]->GetNbinsX();iX++ ){
-  for(Int_t iY =0; iY<h2_trueE_trueY_var[0]->GetNbinsY();iY++ ){
-    if(h2_nuwro_true->GetBinContent(iX+1,iY+1)>0) 
-      h2_Ar_diff -> SetBinContent( iX+1, iY+1, h2_trueE_trueY_nominal->GetBinContent(iX+1,iY+1) + h2_trueE_trueY_var[0]->GetBinContent(iX+1,iY+1)*finI + h2_trueE_trueY_var[1]->GetBinContent(iX+1,iY+1)*finJ + h2_trueE_trueY_var[2]->GetBinContent(iX+1,iY+1)*finK  + h2_trueE_trueY_var[3]->GetBinContent(iX+1,iY+1)*finII + h2_trueE_trueY_var[4]->GetBinContent(iX+1,iY+1)*finJJ + h2_trueE_trueY_var[5]->GetBinContent(iX+1,iY+1)*finKK  + h2_trueE_trueY_var[6]->GetBinContent(iX+1,iY+1)*finIII + h2_trueE_trueY_var[7]->GetBinContent(iX+1,iY+1)*finJJJ + h2_trueE_trueY_var[8]->GetBinContent(iX+1,iY+1)*finKKK  + h2_trueE_trueY_var[9]->GetBinContent(iX+1,iY+1)*finIIII  - 10 * h2_trueE_trueY_nominal->GetBinContent(iX+1,iY+1) - h2_nuwro_true->GetBinContent(iX+1,iY+1)) ;
+    double res = MCMC_processing(_currList);
+    if(res/saveRes>1){ 
+      for(int j=0;j<10;j++){
+        saveList[j] = _currList.at(j);
+	saveRes = res;
+      }
+    }
   }
+
+  double finI = saveList[0];
+  double finJ = saveList[1];
+  double finK = saveList[2];
+  double finII = saveList[3];
+  double finJJ = saveList[4];
+  double finKK = saveList[5];
+  double finIII = saveList[6];
+  double finJJJ = saveList[7];
+  double finKKK = saveList[8];
+  double finIIII = saveList[9];
+
+  for(Int_t iX =0; iX<h2_trueE_trueY_var[0]->GetNbinsX();iX++ ){
+    for(Int_t iY =0; iY<h2_trueE_trueY_var[0]->GetNbinsY();iY++ ){
+      if(h2_nuwro_true->GetBinContent(iX+1,iY+1)>0)
+        h2_Ar_diff -> SetBinContent( iX+1, iY+1, 
+          h2_trueE_trueY_nominal->GetBinContent(iX+1,iY+1) + 
+          h2_trueE_trueY_var[0]->GetBinContent(iX+1,iY+1)*finI + 
+          h2_trueE_trueY_var[1]->GetBinContent(iX+1,iY+1)*finJ + 
+	  h2_trueE_trueY_var[2]->GetBinContent(iX+1,iY+1)*finK + 
+	  h2_trueE_trueY_var[3]->GetBinContent(iX+1,iY+1)*finII + 
+	  h2_trueE_trueY_var[4]->GetBinContent(iX+1,iY+1)*finJJ + 
+	  h2_trueE_trueY_var[5]->GetBinContent(iX+1,iY+1)*finKK  + 
+	  h2_trueE_trueY_var[6]->GetBinContent(iX+1,iY+1)*finIII + 
+	  h2_trueE_trueY_var[7]->GetBinContent(iX+1,iY+1)*finJJJ + 
+	  h2_trueE_trueY_var[8]->GetBinContent(iX+1,iY+1)*finKKK + 
+	  h2_trueE_trueY_var[9]->GetBinContent(iX+1,iY+1)*finIIII - 
+	  10 * h2_trueE_trueY_nominal->GetBinContent(iX+1,iY+1) - h2_nuwro_true->GetBinContent(iX+1,iY+1)) ;
+    }
+  }
+
+  TCanvas* c1 = new TCanvas();
+  c1->Divide(3,4);
+  c1->cd(1);
+  h2_trueE_trueY_nominal->GetXaxis()->SetTitle("True Ev (GeV)");
+  h2_trueE_trueY_nominal->GetYaxis()->SetTitle("True Y ");
+  h2_trueE_trueY_nominal->Draw("colz");
+  c1->cd(2);
+  h2_recoE_recoY_nominal->Draw("colz");
+  h2_recoE_recoY_nominal->GetXaxis()->SetTitle("Reco. Ev (GeV)");
+  h2_recoE_recoY_nominal->GetYaxis()->SetTitle("Reco. Y ");
+
+  for(Int_t i=0;i<6;i++){
+    c1->cd(2*i+3);
+    h2_trueE_trueY_var[i]->Draw("colz");
+    h2_trueE_trueY_var[i]->GetXaxis()->SetTitle("True Ev (GeV)");
+    h2_trueE_trueY_var[i]->GetYaxis()->SetTitle("True Y ");
+
+    c1->cd(2*i+4);
+    h2_recoE_recoY_var[i]->Draw("colz");
+    h2_recoE_recoY_var[i]->GetXaxis()->SetTitle("Reco. Ev (GeV)");
+    h2_recoE_recoY_var[i]->GetYaxis()->SetTitle("Reco. Y ");
+
+  }
+
+  new TCanvas();
+  h2_nuwro_true->Draw("colz");
+  h2_nuwro_true->GetXaxis()->SetTitle("Reco. Ev (GeV)");
+  h2_nuwro_true->GetYaxis()->SetTitle("Reco. Y ") ;
+
+  new TCanvas();
+  h2_Ar_diff->Draw("colz");
+  h2_Ar_diff->SetTitle("Difference between nuwro and fitted genie on Ar");
+  h2_Ar_diff->GetXaxis()->SetTitle("True Ev (GeV)");
+  h2_Ar_diff->GetYaxis()->SetTitle("True Y ") ;
+  h2_Ar_diff->GetZaxis()->SetRangeUser(-1000,1000);
+
 }
 
-TCanvas* c1 = new TCanvas();
-c1->Divide(3,4);
-c1->cd(1);
-h2_trueE_trueY_nominal->GetXaxis()->SetTitle("True Ev (GeV)");
-h2_trueE_trueY_nominal->GetYaxis()->SetTitle("True Y ");
-h2_trueE_trueY_nominal->Draw("colz");
-c1->cd(2);
-h2_recoE_recoY_nominal->Draw("colz");
-h2_recoE_recoY_nominal->GetXaxis()->SetTitle("Reco. Ev (GeV)");
-h2_recoE_recoY_nominal->GetYaxis()->SetTitle("Reco. Y ");
+double MCMC_processing(std::vector currList){
 
-for(Int_t i=0;i<6;i++){
-  c1->cd(2*i+3);
-  h2_trueE_trueY_var[i]->Draw("colz");
-  h2_trueE_trueY_var[i]->GetXaxis()->SetTitle("True Ev (GeV)");
-  h2_trueE_trueY_var[i]->GetYaxis()->SetTitle("True Y ");
-  
-  c1->cd(2*i+4);
-  h2_recoE_recoY_var[i]->Draw("colz");
-  h2_recoE_recoY_var[i]->GetXaxis()->SetTitle("Reco. Ev (GeV)");
-  h2_recoE_recoY_var[i]->GetYaxis()->SetTitle("Reco. Y ");
+  double currI[10];
+  double saveList[10];
+  for(int i=0;i<10;i++){ 
+    currI[i]   = currList.at(i);
+    saveList[i]= currList.at(i);
+  }
+  double acc = 0;
+  for(Int_t iX =0; iX<h2_trueE_trueY_var[0]->GetNbinsX();iX++ ){
+    for(Int_t iY =0; iY<h2_trueE_trueY_var[0]->GetNbinsY();iY++ ){
+      if(h2_nuwro_true->GetBinContent(iX+1,iY+1)>0) acc +=
+        TMath::Power(h2_trueE_trueY_nominal->GetBinContent(iX+1,iY+1) +
+        (h2_trueE_trueY_var[0]->GetBinContent(iX+1,iY+1)-h2_trueE_trueY_nominal->GetBinContent(iX+1,iY+1))*currI[0] +
+        (h2_trueE_trueY_var[1]->GetBinContent(iX+1,iY+1)-h2_trueE_trueY_nominal->GetBinContent(iX+1,iY+1))*currI[1] +
+        (h2_trueE_trueY_var[2]->GetBinContent(iX+1,iY+1)-h2_trueE_trueY_nominal->GetBinContent(iX+1,iY+1))*currI[2] +
+        (h2_trueE_trueY_var[3]->GetBinContent(iX+1,iY+1)-h2_trueE_trueY_nominal->GetBinContent(iX+1,iY+1))*currI[3] +
+        (h2_trueE_trueY_var[4]->GetBinContent(iX+1,iY+1)-h2_trueE_trueY_nominal->GetBinContent(iX+1,iY+1))*currI[4] +
+        (h2_trueE_trueY_var[5]->GetBinContent(iX+1,iY+1)-h2_trueE_trueY_nominal->GetBinContent(iX+1,iY+1))*currI[5] +
+        (h2_trueE_trueY_var[6]->GetBinContent(iX+1,iY+1)-h2_trueE_trueY_nominal->GetBinContent(iX+1,iY+1))*currI[6] +
+        (h2_trueE_trueY_var[7]->GetBinContent(iX+1,iY+1)-h2_trueE_trueY_nominal->GetBinContent(iX+1,iY+1))*currI[7] +
+        (h2_trueE_trueY_var[8]->GetBinContent(iX+1,iY+1)-h2_trueE_trueY_nominal->GetBinContent(iX+1,iY+1))*currI[8] +
+        (h2_trueE_trueY_var[9]->GetBinContent(iX+1,iY+1)-h2_trueE_trueY_nominal->GetBinContent(iX+1,iY+1))*currI[9] -
+        h2_nuwro_true->GetBinContent(iX+1,iY+1),2) / h2_nuwro_true->GetBinContent(iX+1,iY+1) ;
+    }
+  }
+  for(int i=0;i<9;i++)
+    acc += currI[i]*currI[i];
+
+  return acc;
 
 }
 
-new TCanvas();
-h2_nuwro_true->Draw("colz");
-h2_nuwro_true->GetXaxis()->SetTitle("Reco. Ev (GeV)");
-h2_nuwro_true->GetYaxis()->SetTitle("Reco. Y ") ;
-
-new TCanvas();
-h2_Ar_diff->Draw("colz");
-h2_Ar_diff->SetTitle("Difference between nuwro and fitted genie on Ar");
-h2_Ar_diff->GetXaxis()->SetTitle("True Ev (GeV)");
-h2_Ar_diff->GetYaxis()->SetTitle("True Y ") ;
-h2_Ar_diff->GetZaxis()->SetRangeUser(-1000,1000);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //applying to CH
 //
+applyToCH(){
 
-for(Int_t i=0;i<10;i++){
+  for(Int_t i=0;i<10;i++){
   wgt_MaCCQE[i]=0;
   wgt_VecFFCCQEshape[i]=0; 
   wgt_MaCCRES[i]=0;
