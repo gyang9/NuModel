@@ -206,20 +206,26 @@ void MCMC::MCMC_master(){
 
   std::vector<double> _currList ;
 
-  for(int i = 0 ; i < 100000 ; i ++){
+  for(int i = 0 ; i < iterationTime ; i ++){
     std::cout<<"MCM step number " << i<<std::endl;
     for(int ii = 0; ii < 10; ii ++){
       currVec[ii] = saveList[ii];
-      _currList.push_back( currVec[ii] + gRandom -> Uniform(0,1) ); 
+      _currList.push_back( currVec[ii] + gRandom -> Gaus(0,3) ); 
     }
     double res = MCMC_processing(_currList);
-    if( res/saveRes > 1 ){ 
+    cout<<"result chi2 "<<res<<" "<<saveRes<<endl;
+    if( res/saveRes < 1 ){ 
       for(int j = 0; j < 10; j ++){
         saveList[j] = _currList.at(j);
 	saveRes = res;
+        cout<<i<<" "<<saveList[j]<<" "<<saveRes<<endl;
       }
     }
+    _currList.clear();
   }
+  for(int j = 0; j < 10; j ++)
+    cout<<saveList[j]<<endl;
+  cout<<saveRes<<endl;
 
   finI = saveList[0];
   finJ = saveList[1];
@@ -575,6 +581,7 @@ void MCMC::applyToCH(){
 int main(){
   //beauty();
   MCMC mcmc;
+  mcmc.setIterationTime(1000000);
   mcmc.process_Ar();
   mcmc.MCMC_master();
 

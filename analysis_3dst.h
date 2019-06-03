@@ -72,5 +72,9 @@ public:
   void MCMC_master();
   double MCMC_processing(std::vector<double> currList);
   void applyToCH();
+  void setIterationTime(int time){iterationTime = time;}
+  int getIterationTime(){return iterationTime;}
+
+  int iterationTime;
 
 };
